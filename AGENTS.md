@@ -11,8 +11,6 @@
 - El tamaño del canvas en `index.html` y las constantes `W`/`H` de `game.js` están duplicados (800 × 600). Si cambias las dimensiones, actualiza ambos.
 - `loop()` entrega `dt` en segundos, limitado a 0.05; las actualizaciones y los temporizadores usan esa unidad.
 - `keys` representa teclas mantenidas; `pressed(code)` consume `justPressed`. El disparo y el reinicio usan este último mecanismo, no lectura continua de `keys`.
-- Los estados son `playing`, `dead` y `gameover`: `initGame()` reinicia puntuación/vidas/nivel; `Ship.reset()` solo reinicia la nave y concede invencibilidad; `nextLevel()` conserva puntuación y vidas.
+- Los estados son `playing`, `dead` y `gameover`: `initGame()` reinicia toda la partida; `Ship.reset()` reinicia la nave y concede invencibilidad; `nextLevel()` conserva puntuación, vidas, power-ups sin recoger y el tiempo de Velocidad mediante `preserveSpeedBoost`.
 - Los tamaños de asteroide son 1 = pequeño, 2 = mediano, 3 = grande; `RADII`, `SPEEDS` y `POINTS` usan esos índices.
-
-## Discrepancia documental
-- El README anuncia power-ups y una estrella fugaz, pero no están implementados en `game.js`. No los trates como funcionalidades existentes.
+- Velocidad multiplica el desplazamiento, no `vx`/`vy`: evita acumular velocidad permanente. Una nueva recolección reinicia el temporizador a 5 segundos; morir lo cancela. Sus constantes y `SpeedPowerUp` están antes de `Ship`.
